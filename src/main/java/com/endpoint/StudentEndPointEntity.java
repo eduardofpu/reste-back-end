@@ -4,13 +4,17 @@ package com.endpoint;
 import com.error.ResourceNotFoundException;
 import com.model.StudenteEnty;
 import com.repository.StudentRepository;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.rowset.Predicate;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -68,11 +72,19 @@ public class StudentEndPointEntity {
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(path = "/contador")
+    public ResponseEntity<?> contador(){
+
+        Long contador = studentDao.count();
+        String cont = String.valueOf("Total de elementos no banco de dados = "+contador);
+        System.out.println(cont);
+        return new ResponseEntity<>(cont,HttpStatus.OK);
+    }
+
     private void verifyIfStudentExists(Long id){
         if(studentDao.findOne(id) == null){
 
             throw new ResourceNotFoundException("Student not found for ID: "+id);
         }
     }
-
 }

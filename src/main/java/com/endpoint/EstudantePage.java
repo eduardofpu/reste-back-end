@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -69,12 +72,32 @@ public class EstudantePage{
         return  new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/contador")
-    public ResponseEntity<?> contador(){
+    @GetMapping(path = "/totalelementos")
+    public ResponseEntity<?> totalElementos(){
+
         Long contador = studentDao.count();
         String cont = String.valueOf("Total de elementos no banco de dados = "+contador);
         System.out.println(cont);
         return new ResponseEntity<>(cont,HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/contador")
+    public ResponseEntity<?> contador(){
+        int cont = 0;
+        cont = getCont(cont);
+        System.out.println(cont);
+       // String mostrarTotal = String.valueOf("Total de nomes escolhido = "+cont);
+        String mostrarTotal = String.format("Total de nomes escolhido  = %s ",cont);
+        return new ResponseEntity<>(mostrarTotal,HttpStatus.OK);
+    }
+
+    private int getCont(int cont) {
+        List<StudenteEnty> nome = studentDao.findByNameIgnoreCaseContaining("goku");
+        for(StudenteEnty s : nome){
+            if(s.getName().equals("goku"))
+                cont++;
+        }
+        return cont;
     }
 
     private void verifyIfStudentExists(Long id){

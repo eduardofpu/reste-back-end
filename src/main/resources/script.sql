@@ -76,5 +76,20 @@ INSERT INTO public.studente_enty
 (id, name, email)
 VALUES(24, 'homem de ferro', 'nome@gamil.com');
 
+////////////////////////
+
+
+INSERT INTO public.uf_ibge
+(id, nome, sigla)
+VALUES(33, 'Rio de Janeiro', 'RJ');
+
+INSERT INTO public.regiao_ibge
+(id, nome, sigla)
+VALUES(3, 'Sudeste', 'SE');
+
+INSERT INTO public.ibge
+(id, nome, regiao_id, uf_id)
+VALUES(3301, 'Noroeste Fluminense', 3, 33);
+
 
 
