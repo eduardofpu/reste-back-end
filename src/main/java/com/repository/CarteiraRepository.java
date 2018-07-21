@@ -12,7 +12,7 @@ public interface CarteiraRepository extends JpaRepository<Carteira, Long> {
     String SUM = "select sum(c.valor) from Carteira c";
 
     @Query(SUM)
-    BigDecimal fidSumCarteira();
+    BigDecimal sumTotalCarteira();
 
 
 
