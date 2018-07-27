@@ -1,3 +1,5 @@
+///////////////////////studente/////////////////////////////
+
 INSERT INTO public.studente_enty
 (id, name, email)
 VALUES(1, 'goku', 'nome@gamil.com');
@@ -76,7 +78,7 @@ INSERT INTO public.studente_enty
 (id, name, email)
 VALUES(24, 'homem de ferro', 'nome@gamil.com');
 
-////////////////////////
+//////////ibge/////////////
 
 
 INSERT INTO public.uf_ibge
@@ -90,6 +92,20 @@ VALUES(3, 'Sudeste', 'SE');
 INSERT INTO public.ibge
 (id, nome, regiao_id, uf_id)
 VALUES(3301, 'Noroeste Fluminense', 3, 33);
+
+///////////////carteira////////////////////
+
+select sum(c.valor) as total from tb_carteira c;
+
+select * from  tb_carteira tc;
+
+insert into tb_carteira (id, valor) values (1,50);
+insert into tb_carteira (id, valor) values (2,250);
+insert into tb_carteira (id, valor) values (3,350);
+insert into tb_carteira (id, valor) values (4,450);
+insert into tb_carteira (id, valor) values (5,550);
+insert into tb_carteira (id, valor) values (6,650);
+insert into tb_carteira (id, valor) values (7,750);
 
 
 

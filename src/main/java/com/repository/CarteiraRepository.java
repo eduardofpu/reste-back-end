@@ -13,7 +13,4 @@ public interface CarteiraRepository extends JpaRepository<Carteira, Long> {
 
     @Query(SUM)
     BigDecimal sumTotalCarteira();
-
-
-
 }
