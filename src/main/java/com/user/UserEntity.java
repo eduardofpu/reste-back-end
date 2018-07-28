@@ -1,8 +1,6 @@
 package com.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Entity
 public class UserEntity {
@@ -39,9 +38,9 @@ public class UserEntity {
 
     public static UserEntity update(Long id, String name, String password, UserRepository repository, Validator validator) {
 
-        validator.verifyIfUserExists(id);
-        validator.verifyIfNameIsPasswordNotNull(name, password);
-
+        validator.validate(id, name, password);
+        //validator.verifyIfUserExists(id);
+        //validator.verifyIfNameIsPasswordNotNull(name, password);
         UserEntity user = new UserEntity(id, name, password);
         return repository.save(user);
     }
@@ -50,6 +49,6 @@ public class UserEntity {
 
         validator.verifyIfUserExists(id);
         UserEntity userId = new UserEntity(id);
-          repository.delete(userId);
+        repository.delete(userId);
     }
 }

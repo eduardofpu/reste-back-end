@@ -30,12 +30,12 @@ public class UserController {
     }
 
     @PutMapping(path = "edit")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public UserIdResponse update(@RequestBody UserEntity userEntity){
         return userService.update(userEntity);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") Long id){
         userService.delete(id);
