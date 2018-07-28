@@ -125,8 +125,8 @@ public class UserControllerTest extends AbstractTest {
     @Test
     public void delete() throws Exception {
 
-        UserEntity edit = save();
-        String id = valueOf(edit.getId());
+        UserEntity created = save();
+        String id = valueOf(created.getId());
 
         this.mockMvc.perform(
                 MockMvcRequestBuilders.delete(PATH + id)
