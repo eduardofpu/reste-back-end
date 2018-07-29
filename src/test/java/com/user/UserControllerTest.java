@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import net.minidev.json.JSONObject;
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.Assertions;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.Test;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -137,7 +139,23 @@ public class UserControllerTest extends AbstractTest {
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
+        Assertions.assertThat(id).isNotNull();
     }
+
+    @Test
+    public void deleteNotFound() throws Exception {
+
+
+        this.mockMvc.perform(
+                MockMvcRequestBuilders.delete(PATH )
+                        .contentType(APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+    }
+
 
     @Test
     public void NotFound() throws Exception {
