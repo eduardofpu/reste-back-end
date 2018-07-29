@@ -12,13 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ApplicationStarte.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Transactional
 public abstract class AbstractTest {
     @Autowired
     UserRepository repository;
 
     @Autowired
     Validator validator;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     MockMvc mockMvc;
