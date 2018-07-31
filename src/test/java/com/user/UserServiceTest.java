@@ -27,9 +27,11 @@ public class UserServiceTest extends AbstractTest {
         UserRequest userRequest = new UserRequest("Matheus", "123");
         UserIdResponse userIdResponse = userService.create(userRequest);
 
-        Assertions.assertThat(userIdResponse.getId()).isNotNull();
-        Assertions.assertThat(userRequest.getName()).isEqualTo("Matheus");
-        Assertions.assertThat(userRequest.getPassword()).isEqualTo("123");
+        UserEntity one = repository.findOne(userIdResponse.getId());
+
+        Assertions.assertThat(one.getId()).isEqualTo(userIdResponse.getId());
+        Assertions.assertThat(userRequest.getName()).isEqualTo(userRequest.getName());
+        Assertions.assertThat(userRequest.getPassword()).isEqualTo(userRequest.getPassword());
     }
 
     @Test
@@ -40,16 +42,18 @@ public class UserServiceTest extends AbstractTest {
         UserIdResponse update = userService.update(edit);
         UserEntity one = repository.findOne(update.getId());
 
-        Assertions.assertThat(one.getId()).isEqualTo(user.getId());
-        Assertions.assertThat(edit.getName()).isEqualTo("Ludimila Martins");
-        Assertions.assertThat(edit.getPassword()).isEqualTo("12345");
+        Assertions.assertThat(one.getId()).isEqualTo(edit.getId());
+        Assertions.assertThat(one.getName()).isEqualTo(edit.getName());
+        Assertions.assertThat(one.getPassword()).isEqualTo(edit.getPassword());
     }
 
     @Test
     public void delete() {
         UserEntity user = save();
-        userService.delete(user.getId());
+
         Assertions.assertThat(user.getId()).isNotNull();
+        userService.delete(user.getId());
+
 
     }
 

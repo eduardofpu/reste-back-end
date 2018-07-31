@@ -128,6 +128,8 @@ public class UserControllerTest extends AbstractTest {
     public void delete() throws Exception {
 
         UserEntity created = save();
+        Assertions.assertThat(created.getId()).isNotNull();
+
         String id = valueOf(created.getId());
 
         this.mockMvc.perform(
